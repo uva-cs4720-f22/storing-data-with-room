@@ -1,5 +1,6 @@
 package edu.virginia.cs4720.roomexample
 
+import android.content.Context
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.widget.EditText
 import androidx.lifecycle.lifecycleScope
 import androidx.room.*
 import kotlinx.coroutines.launch
+import java.io.File
 
 /**************
  * Tutorials reference:
@@ -27,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     // initializing the database doesn't have to hinder the app's normal loading
     // and it only gets allocated if needed.  Hence lazy initialization.
     private val appDatabase by lazy { AppRoomDatabase.getDatabase(this).studentDao()}
+    private val FILENAME = "examplefile"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +42,11 @@ class MainActivity : AppCompatActivity() {
 
     fun printDB(view: View) {
         Log.i("RoomAppExample", appDatabase.getStudentListByComputingID().toString())
+
+        // Reading files example - reading the text out of a plain text file
+        val file = File(this.filesDir, FILENAME)
+        Log.i("RoomAppExample",file.readText())
+
     }
 
     fun addStudent(view: View) {
@@ -53,7 +61,12 @@ class MainActivity : AppCompatActivity() {
             appDatabase.insert(Student(compID.text.toString(), name.text.toString()))
         }
 
+        // Reading Files example - opening a file to append text to it.
+        val file = File(this.filesDir, FILENAME)
+        file.appendText(compID.text.toString())
         Log.i("RoomAppExample", compID.text.toString() + " added!")
+
+
     }
 
 }
