@@ -10,6 +10,17 @@ import androidx.lifecycle.lifecycleScope
 import androidx.room.*
 import kotlinx.coroutines.launch
 
+/**************
+ * Tutorials reference:
+ * https://developer.android.com/codelabs/android-room-with-a-view-kotlin#0
+ * https://developer.android.com/training/data-storage/room/accessing-data
+ * https://johncodeos.com/how-to-use-room-in-android-using-kotlin/
+ * https://howtodoandroid.com/room-database-android/
+ * https://medium.com/huawei-developers/room-database-with-kotlin-mvvm-architecture-477c3ad3c264
+ *
+ *
+ */
+
 class MainActivity : AppCompatActivity() {
 
     private val appDatabase by lazy { AppRoomDatabase.getDatabase(this).studentDao()}
